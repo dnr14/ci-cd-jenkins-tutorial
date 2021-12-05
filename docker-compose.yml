@@ -1,0 +1,9 @@
+version: '3'
+services:
+  proxy:
+    build:
+      context: ./
+    container_name: proxy
+    ports:
+      - "80:80"
+    restart: "unless-stopped"
