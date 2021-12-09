@@ -4,9 +4,9 @@ services:
     build:
       # 현재 디렉토리에서 Dockerfile을 찾는다.
       context: ./
-    # 빌드된 이미지 이름을 proxy로 하겠다.
-    container_name: proxy
-    # 호스트 80 포트와 도커 컨테이너의 80 포트는 연결하겠다.
     ports:
       - "80:80"
+    container_name: proxy_container
     restart: "unless-stopped"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
