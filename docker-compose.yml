@@ -5,8 +5,6 @@ services:
       # 현재 디렉토리에서 Dockerfile을 찾는다.
       context: ./
     ports:
-      - "80:80"
+      - "90:80"
     container_name: proxy_container
     restart: "unless-stopped"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"

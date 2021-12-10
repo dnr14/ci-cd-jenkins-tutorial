@@ -1,29 +1,21 @@
 pipeline {
     agent any
-     tools {
-        nodejs "node14"
-        git "git"
-    }
     stages {
-        stage('전처리') {
-            steps {
-                echo 'prepare'
-                git branch: "${BRANCH}", credentialsId: "GIT_ACCOUNT", url: 'https://github.com/dnr14/ci-cd-jenkins-tutorial.git'
-                sh  'ls -al'
-            }
-        }
         stage('빌드') {
             steps {
                 echo 'build'
                 sh 'ls -al'
-                sh "npm install"
-                sh "CI=false npm run build"
+                sh "sudo npm install"
+                sh "sudo npm run build"
             }
         }
         stage('배포') {
             steps {
                 echo 'deploy'
                 sh "ls -al"
+                sh "docker rm -f `docker ps -a -q`"
+                sh "docker rmi `docker images -q`"
+                sh "docker-compose up -d"
             }
         }
     }
